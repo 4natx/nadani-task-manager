@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nadani Task Manager, aplicativo local de produtividade com Kanban, lista e indicadores. Demonstração de portfólio.">
+  <title>Nadani Task Manager</title>
+  <link rel="icon" href="./assets/icons/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/main.css">
+  <script src="./js/app.js" type="module"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Ir para o conteúdo</a>
+  <aside class="sidebar">
+    <a class="brand" href="#dashboard">
+      <img src="./assets/icons/logo.svg" width="39" height="39" alt="">
+      <span><strong>Nadani</strong><small>Task Manager</small></span>
+    </a>
+    <nav class="navigation" aria-label="Navegação principal">
+      <p class="nav-label">Área de trabalho</p>
+      <a href="#dashboard" data-view="dashboard"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#grid"></use></svg><span>Visão geral</span></a>
+      <a href="#board" data-view="board"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#board"></use></svg><span>Kanban</span></a>
+      <a href="#list" data-view="list"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#list"></use></svg><span>Lista</span></a>
+      <a href="#settings" data-view="settings"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#settings"></use></svg><span>Configurações</span></a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="storage-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#disk"></use></svg></div>
+      <div><strong>Espaço local</strong><small>Dados neste navegador</small></div>
+    </div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar">
+      <a class="mobile-brand" href="#dashboard"><img src="./assets/icons/logo.svg" width="32" height="32" alt=""> Nadani</a>
+      <div class="trail"><span>Área de trabalho</span><span class="trail-divider" aria-hidden="true">/</span><strong id="breadcrumb">Visão geral</strong></div>
+      <div class="actions">
+        <button type="button" class="icon-button" id="theme-toggle" aria-label="Alternar tema"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#moon"></use></svg></button>
+        <button type="button" class="button primary" id="create-task"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#plus"></use></svg>Nova tarefa</button>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <noscript><p class="banner">Ative o JavaScript para usar o gerenciador de tarefas.</p></noscript>
+      <section class="banner" id="storage-warning" hidden aria-labelledby="storage-title">
+        <svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#alert"></use></svg>
+        <div><h2 id="storage-title">Atenção ao armazenamento local</h2><p id="storage-message"></p>
+          <div class="actions"><button type="button" class="button secondary" id="raw-backup"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#download"></use></svg>Baixar dados originais</button><button type="button" class="button secondary" id="repair-storage">Gravar dados recuperados</button></div>
+        </div>
+      </section>
+      <section class="view" id="dashboard" aria-labelledby="dashboard-title">
+        <div class="page-heading">
+          <div><h1 id="dashboard-title" tabindex="-1">Visão geral</h1><p>Acompanhe o progresso e veja o que precisa de atenção.</p></div>
+          <a class="button secondary" href="#board"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#board"></use></svg> Abrir quadro</a>
+        </div>
+        <section class="welcome" id="welcome" aria-labelledby="welcome-title" hidden>
+          <div class="welcome-copy">
+            <div class="welcome-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#spark"></use></svg></div>
+            <h2 id="welcome-title">Seu trabalho, em ordem.</h2>
+            <p>Crie uma tarefa e acompanhe seu caminho do planejamento à entrega. Você também pode explorar com um projeto de exemplo.</p>
+            <div class="actions"><button type="button" class="button primary" id="welcome-create"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#plus"></use></svg>Criar primeira tarefa</button><button type="button" class="button secondary" id="load-demo">Carregar exemplo</button></div>
+          </div>
+          <svg class="welcome-art" viewBox="0 0 320 218" aria-hidden="true">
+            <defs><linearGradient id="welcome-gradient" x2="1" y2="1"><stop stop-color="var(--accent)" stop-opacity=".27"/><stop offset="1" stop-color="var(--accent)" stop-opacity=".03"/></linearGradient></defs>
+            <path d="M23 190h274M23 157h274M23 124h274M23 91h274M23 58h274M23 25h274M38 20v177m43-177v177m43-177v177m43-177v177m43-177v177m43-177v177m43-177v177" stroke="var(--accent)" opacity=".15"/>
+            <g transform="rotate(-10 144 106)"><rect x="61" y="37" width="176" height="126" rx="18" fill="var(--panel)" stroke="var(--quiet-line)"/><rect x="61" y="37" width="176" height="126" rx="18" fill="url(#welcome-gradient)"/><rect x="81" y="59" width="43" height="8" rx="4" fill="var(--accent)" opacity=".6"/><rect x="81" y="80" width="136" height="9" rx="4.5" fill="var(--accent)" opacity=".18"/><rect x="81" y="97" width="112" height="9" rx="4.5" fill="var(--accent)" opacity=".16"/><rect x="81" y="114" width="121" height="9" rx="4.5" fill="var(--accent)" opacity=".15"/></g>
+            <g transform="rotate(8 209 143)"><rect x="139" y="100" width="148" height="88" rx="16" fill="var(--panel)" stroke="var(--quiet-line)"/><circle cx="170" cy="137" r="16" fill="var(--accent-bg)"/><path d="m163 137 5 5 9-11" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="195" y="128" width="67" height="7" rx="3.5" fill="var(--accent)" opacity=".43"/><rect x="195" y="144" width="50" height="7" rx="3.5" fill="var(--accent)" opacity=".19"/></g>
+            <path d="M266 51v20m-10-10h20M46 147v16m-8-8h16" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </section>
+        <section class="metrics" id="metrics" aria-label="Indicadores de produtividade"></section>
+        <section class="insights" aria-label="Gráficos de tarefas">
+          <article class="panel insight"><header><div><h2>Distribuição por status</h2><p>O progresso em cada etapa do quadro</p></div><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#chart"></use></svg></header><div id="status-chart" class="status-chart"></div></article>
+          <article class="panel insight"><header><div><h2>Tarefas por prioridade</h2><p>Quantidade por nível de prioridade</p></div><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#chart"></use></svg></header><div id="priority-chart" class="priority-chart"></div></article>
+        </section>
+        <section class="panel activity" aria-labelledby="activity-title">
+          <div class="activity-head"><h2 id="activity-title">Atividade recente</h2><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#clock"></use></svg></div>
+          <ul id="activity-list"></ul>
+        </section>
+      </section>
+      <section class="view" id="tasks-view" aria-labelledby="tasks-title" hidden>
+        <div class="page-heading">
+          <div><h1 id="tasks-title" tabindex="-1">Kanban</h1><p id="tasks-description"></p></div>
+          <div class="view-switch" aria-label="Visualização de tarefas">
+            <a href="#board" data-switch="board"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#board"></use></svg> Kanban</a>
+            <a href="#list" data-switch="list"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#list"></use></svg> Lista</a>
+          </div>
+        </div>
+        <form id="filters" class="panel filters" role="search" aria-label="Pesquisar e filtrar tarefas">
+          <div class="filter-main">
+            <label class="search-field"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#search"></use></svg><span class="sr-only">Pesquisar tarefas</span><input type="search" name="query" placeholder="Pesquisar tarefas…" autocomplete="off" maxlength="150"></label>
+            <button class="button secondary" type="button" id="toggle-filters" aria-controls="filter-options" aria-expanded="false"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#settings"></use></svg> Filtros <span id="filter-count" class="filter-count" hidden></span></button>
+          </div>
+          <div class="filter-options" id="filter-options" hidden>
+            <label>Status<select name="status"><option value="">Todos</option><option value="todo">A fazer</option><option value="in_progress">Em andamento</option><option value="done">Concluída</option></select></label>
+            <label>Prioridade<select name="priority"><option value="">Todas</option><option value="low">Baixa</option><option value="medium">Média</option><option value="high">Alta</option><option value="urgent">Urgente</option></select></label>
+            <label>Categoria<select name="category"><option value="">Todas</option></select></label>
+            <label class="checkbox"><input type="checkbox" name="overdue"> Somente atrasadas</label>
+            <label class="checkbox"><input type="checkbox" name="done"> Somente concluídas</label>
+            <button type="button" class="button secondary" id="clear-filters"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#close"></use></svg>Limpar filtros</button>
+          </div>
+          <div class="results-bar">
+            <p id="results-count" role="status"></p>
+            <label id="sort-options" hidden>Ordenar por <select name="sort"><option value="created">Mais recentes</option><option value="due">Vencimento</option><option value="priority">Prioridade</option><option value="status">Status</option><option value="title">Título</option></select></label>
+          </div>
+        </form>
+        <div id="task-results"></div>
+      </section>
+      <section class="view" id="settings" aria-labelledby="settings-title" hidden>
+        <div class="page-heading"><div><h1 id="settings-title" tabindex="-1">Configurações</h1><p>Personalize sua experiência e gerencie seus dados locais.</p></div></div>
+        <div class="settings-grid">
+          <section class="panel settings-panel"><header><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#settings"></use></svg><div><h2>Preferências</h2><p>Sua configuração é salva neste navegador.</p></div></header>
+            <label for="pref-theme">Tema</label><select id="pref-theme"><option value="system">Acompanhar sistema</option><option value="light">Claro</option><option value="dark">Escuro</option></select>
+            <label for="pref-view">Visualização inicial</label><select id="pref-view"><option value="dashboard">Visão geral</option><option value="board">Kanban</option><option value="list">Lista</option></select>
+          </section>
+          <section class="panel settings-panel"><header><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#disk"></use></svg><div><h2>Dados e backup</h2><p>As tarefas ficam vinculadas a este navegador, perfil e dispositivo.</p></div></header>
+            <div class="actions"><button type="button" class="button secondary" id="export-json"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#download"></use></svg>Exportar JSON</button><button type="button" class="button secondary" id="export-csv"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#download"></use></svg>Exportar CSV</button><button type="button" class="button secondary" id="open-import"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#upload"></use></svg>Importar JSON</button></div>
+            <p>Use JSON para restaurar as tarefas ou CSV para consultar em planilhas.</p>
+          </section>
+          <section class="panel settings-panel"><header><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#spark"></use></svg><div><h2>Experimentar com exemplos</h2><p>Adicione tarefas fictícias de um projeto profissional.</p></div></header>
+            <div><button type="button" class="button secondary" id="settings-demo"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#plus"></use></svg>Carregar exemplo</button></div>
+          </section>
+          <section class="panel settings-panel"><header><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#trash"></use></svg><div><h2>Limpar dados locais</h2><p>Apaga tarefas, histórico e preferências após confirmação.</p></div></header>
+            <div><button type="button" class="button danger-outline" id="clear-storage"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#trash"></use></svg>Limpar dados</button></div>
+          </section>
+        </div>
+        <footer class="app-foot"><p>Demonstração de portfólio. Os dados são locais e sem sincronização.</p><a href="https://nadani.space">Developed by Nadani Productions</a></footer>
+      </section>
+    </main>
+  </div>
+  <dialog id="editor" aria-labelledby="editor-title">
+    <div class="dialog-head"><h2 id="editor-title">Nova tarefa</h2><button type="button" class="icon-button" data-close aria-label="Fechar formulário"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#close"></use></svg></button></div>
+    <form id="task-form" novalidate>
+      <div class="editor-fields">
+        <div class="field"><label for="task-title">Título (obrigatório)</label><input id="task-title" name="title" required maxlength="100" autocomplete="off" autofocus placeholder="Ex. Revisar uma entrega"><span class="field-error" id="error-title" hidden></span></div>
+        <div class="field"><label for="task-description">Descrição</label><textarea id="task-description" name="description" rows="3" maxlength="700"></textarea><span class="field-error" id="error-description" hidden></span></div>
+        <div class="field-pair"><div class="field"><label for="task-status">Status</label><select id="task-status" name="status"><option value="todo">A fazer</option><option value="in_progress">Em andamento</option><option value="done">Concluída</option></select><span class="field-error" id="error-status" hidden></span></div><div class="field"><label for="task-priority">Prioridade</label><select id="task-priority" name="priority"><option value="low">Baixa</option><option value="medium">Média</option><option value="high">Alta</option><option value="urgent">Urgente</option></select><span class="field-error" id="error-priority" hidden></span></div></div>
+        <div class="field-pair"><div class="field"><label for="task-dueDate">Vencimento</label><input id="task-dueDate" name="dueDate" type="date"><span class="field-error" id="error-dueDate" hidden></span></div><div class="field"><label for="task-category">Categoria</label><input id="task-category" name="category" maxlength="40" list="category-suggestions" autocomplete="off"><span class="field-error" id="error-category" hidden></span></div></div>
+        <datalist id="category-suggestions"></datalist>
+        <div class="field"><label for="task-tags">Etiquetas separadas por vírgula</label><input id="task-tags" name="tags" maxlength="208" placeholder="Ex. design, revisão" autocomplete="off"><span class="field-error" id="error-tags" hidden></span></div>
+      </div>
+      <div class="dialog-actions"><button type="button" class="button secondary" data-close>Cancelar</button><button type="submit" class="button primary" id="save-task">Salvar tarefa</button></div>
+    </form>
+  </dialog>
+  <dialog id="details" aria-labelledby="details-title">
+    <div class="dialog-head"><h2 id="details-title" tabindex="-1"></h2><button type="button" class="icon-button" data-close aria-label="Fechar detalhes"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#close"></use></svg></button></div>
+    <div id="details-body"></div>
+    <div class="dialog-actions details-actions"><button type="button" class="button danger-outline" id="details-delete"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#trash"></use></svg>Excluir</button><button type="button" class="button secondary" id="details-edit"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#edit"></use></svg>Editar</button></div>
+  </dialog>
+  <dialog id="confirm" aria-labelledby="confirm-title" aria-describedby="confirm-message">
+    <div class="dialog-head"><h2 id="confirm-title">Confirmar ação</h2><button type="button" class="icon-button" data-close aria-label="Cancelar ação"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#close"></use></svg></button></div>
+    <p id="confirm-message"></p>
+    <div class="dialog-actions"><button type="button" class="button secondary" data-close autofocus>Cancelar</button><button type="button" class="button danger" id="confirm-action">Confirmar</button></div>
+  </dialog>
+  <dialog id="import-dialog" aria-labelledby="import-title">
+    <div class="dialog-head"><h2 id="import-title">Importar backup</h2><button type="button" class="icon-button" data-close aria-label="Fechar importação"><svg class="icon" aria-hidden="true" focusable="false"><use href="./assets/icons/ui.svg#close"></use></svg></button></div>
+    <form id="import-form">
+      <label for="import-file">Arquivo JSON</label><input type="file" id="import-file" accept=".json,application/json" required autofocus>
+      <fieldset class="import-modes"><legend>Como aplicar o backup</legend>
+        <label class="checkbox"><input type="radio" name="mode" value="merge" checked> Mesclar com as tarefas locais</label>
+        <label class="checkbox"><input type="radio" name="mode" value="replace"> Substituir todas as tarefas locais</label>
+      </fieldset>
+      <p id="import-feedback" role="status"></p>
+      <div class="dialog-actions"><button type="button" class="button secondary" data-close>Cancelar</button><button type="submit" class="button primary" id="import-submit">Importar</button></div>
+    </form>
+  </dialog>
+  <div class="notifications">
+    <div id="toast" class="toast" role="status"></div>
+    <div id="undo-toast" class="toast undo-toast" hidden><span id="undo-text"></span><button type="button" class="button secondary" id="undo-delete">Desfazer</button></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "nadani-task-manager",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node tools/serve.mjs",
+    "test": "node --test tests/task.test.js",
+    "test:browser": "node tests/browser.mjs"
+  }
+}
